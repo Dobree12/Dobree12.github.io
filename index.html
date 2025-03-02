@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Projects</title>
+    <title>Your Name - Computer Science Portfolio</title>
     <style>
         /* Global Styles */
         * {
@@ -116,76 +116,58 @@
             padding-bottom: 10px;
         }
         
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-        }
-        
-        .project-card {
-            border: 1px solid #ecf0f1;
-            border-radius: 5px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .project-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-bottom: 1px solid #ecf0f1;
-        }
-        
-        .project-content {
-            padding: 20px;
-        }
-        
-        .project-title {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-        
-        .project-description {
+        /* About Section */
+        .about p {
             margin-bottom: 15px;
-            font-size: 0.95rem;
-            color: #555;
+            font-size: 1.1rem;
         }
         
-        .tech-stack {
+        /* Education and Experience */
+        .timeline-item {
+            margin-bottom: 25px;
+        }
+        
+        .timeline-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-item .date {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        
+        /* Skills Section */
+        .skills-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
+            gap: 10px;
         }
         
-        .tech-tag {
+        .skill-pill {
             background-color: #ecf0f1;
-            font-size: 0.8rem;
-            padding: 5px 10px;
-            border-radius: 15px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
         }
         
-        .project-links {
+        /* Contact Section */
+        .contact-info {
             display: flex;
-            gap: 15px;
+            flex-wrap: wrap;
+            gap: 20px;
         }
         
-        .project-links a {
+        .contact-item {
             display: flex;
             align-items: center;
-            font-size: 0.9rem;
-            font-weight: 500;
+            margin-bottom: 10px;
         }
         
-        .project-links a i {
-            margin-right: 5px;
+        .contact-item i {
+            margin-right: 10px;
+            color: #2c3e50;
         }
         
         /* Footer */
@@ -197,12 +179,17 @@
         }
         
         @media (max-width: 768px) {
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            
             main {
                 padding: 20px;
+            }
+            
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .name {
+                font-size: 2rem;
             }
         }
     </style>
@@ -214,8 +201,8 @@
         <div class="container">
             <div class="profile">
                 <img src="diplomamiuc.jpg" alt="Your Photo" class="profile-img">
-                <h1 class="name">Paloti Dobre</h1>
-                <p class="title">Computer Science Student</p>
+                <h1 class="name">Your Name</h1>
+                <p class="title">Computer Science Student | Junior Software Developer</p>
             </div>
         </div>
     </header>
@@ -223,137 +210,89 @@
     <nav>
         <div class="container">
             <ul>
-                <li><a href="index.html">About Me</a></li>
-                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="index.html" class="active">About Me</a></li>
+                <li><a href="projects.html">Projects</a></li>
             </ul>
         </div>
     </nav>
     
     <div class="container">
         <main>
-            <section class="projects" id="projects">
-                <h2>My Projects</h2>
-                <p style="margin-bottom: 25px;">Here are some of the projects I've worked on during my academic journey and personal exploration.</p>
-                
-                <div class="projects-grid">
-                    <!-- Project 1 -->
-                    <div class="project-card">
-                        <img src="/api/placeholder/400/180" alt="Project 1" class="project-img">
-                        <div class="project-content">
-                            <h3 class="project-title">E-Commerce Web Application</h3>
-                            <p class="project-description">A full-stack e-commerce platform with user authentication, product catalog, shopping cart, and payment integration.</p>
-                            <div class="tech-stack">
-                                <span class="tech-tag">React.js</span>
-                                <span class="tech-tag">Node.js</span>
-                                <span class="tech-tag">MongoDB</span>
-                                <span class="tech-tag">Express</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="#"><i class="fab fa-github"></i> GitHub</a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                            </div>
-                        </div>
+            <section class="about" id="about">
+                <h2>About Me</h2>
+                <p>Hello! I'm a final-year Computer Science student passionate about software development and problem-solving. I enjoy creating efficient, user-friendly applications and exploring new technologies.</p>
+                <p>Throughout my academic journey, I've developed strong programming skills and a deep understanding of computer science fundamentals. I'm eager to apply these skills in a professional environment and continue growing as a developer.</p>
+            </section>
+            
+            <section class="education" id="education">
+                <h2>Education</h2>
+                <div class="timeline-item">
+                    <h3>Bachelor of Science in Computer Science</h3>
+                    <p class="date">2022 - 2025</p>
+                    <p>Politehnica University of Timișoara</p>
+                    <p>Relevant coursework: </p>
+                    <li>Data Structures and Algorithms</li>
+                    <li>Object-Oriented Programming
+                    <li>Database Systems, Web Development</li>
+                    <li>Operating Systems, Computer Networks</li>
+                </div>
+                <div class="timeline-item">
+                    <h3>High School Diploma</h3>
+                    <p class="date">2018 - 2022</p>
+                    <p>National College "Elena Ghiba-Birta"</p>
+                </div>
+            </section>
+            
+            <section class="skills" id="skills">
+                <h2>Technical Skills</h2>
+                <div class="skills-list">
+                    <span class="skill-pill">C++</span>
+                    <span class="skill-pill">Dart</span>
+                    <span class="skill-pill">JavaScript</span>
+                    <span class="skill-pill">HTML/CSS</span>
+                    <span class="skill-pill">SQL</span>
+                    <span class="skill-pill">Git</span>
+                    <span class="skill-pill">MySql</span>
+                    <span class="skill-pill">Firebase</span>
+                    <span class="skill-pill">Data Structures</span>
+                    <span class="skill-pill">Algorithms</span>
+                    <span class="skill-pill">Object-Oriented Programming</span>
+                </div>
+
+            </section>
+            <section class="languages" id="languages">
+                <h2>Languages</h2>
+                <div class="timeline-item">
+                    <h3>English</h3>
+                    <p class="date">Proficiency: B2</p>
+                </div>
+            </section>
+            
+            <section class="contact" id="contact">
+                <h2>Contact Information</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="dobrel.paloti@gmail.com">dobrel.paloti@gmail.com</a>
                     </div>
-                    
-                    <!-- Project 2 -->
-                    <div class="project-card">
-                        <img src="/api/placeholder/400/180" alt="Project 2" class="project-img">
-                        <div class="project-content">
-                            <h3 class="project-title">Smart Home Monitoring System</h3>
-                            <p class="project-description">IoT-based system for monitoring temperature, humidity, and security in a home environment with mobile app notifications.</p>
-                            <div class="tech-stack">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">Raspberry Pi</span>
-                                <span class="tech-tag">Flutter</span>
-                                <span class="tech-tag">Firebase</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="#"><i class="fab fa-github"></i> GitHub</a>
-                                <a href="#"><i class="fas fa-file-alt"></i> Documentation</a>
-                            </div>
-                        </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>0741 556 372</span>
                     </div>
-                    
-                    <!-- Project 3 -->
-                    <div class="project-card">
-                        <img src="/api/placeholder/400/180" alt="Project 3" class="project-img">
-                        <div class="project-content">
-                            <h3 class="project-title">Machine Learning Image Classifier</h3>
-                            <p class="project-description">A deep learning model that classifies images into different categories with high accuracy, deployed as a web service.</p>
-                            <div class="tech-stack">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">TensorFlow</span>
-                                <span class="tech-tag">Flask</span>
-                                <span class="tech-tag">HTML/CSS</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="#"><i class="fab fa-github"></i> GitHub</a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                            </div>
-                        </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <a href="https://www.linkedin.com/in/dobre-paloti/" target="_blank">Linkedin</a>
                     </div>
-                    
-                    <!-- Project 4 -->
-                    <div class="project-card">
-                        <img src="/api/placeholder/400/180" alt="Project 4" class="project-img">
-                        <div class="project-content">
-                            <h3 class="project-title">Task Management Application</h3>
-                            <p class="project-description">A productivity app for organizing tasks with features like priority setting, deadlines, categories, and reminders.</p>
-                            <div class="tech-stack">
-                                <span class="tech-tag">JavaScript</span>
-                                <span class="tech-tag">React Native</span>
-                                <span class="tech-tag">Redux</span>
-                                <span class="tech-tag">Firebase</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="#"><i class="fab fa-github"></i> GitHub</a>
-                                <a href="#"><i class="fas fa-mobile-alt"></i> App Store</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Project 5 -->
-                    <div class="project-card">
-                        <img src="/api/placeholder/400/180" alt="Project 5" class="project-img">
-                        <div class="project-content">
-                            <h3 class="project-title">Algorithm Visualizer</h3>
-                            <p class="project-description">An interactive tool for visualizing sorting and pathfinding algorithms to help understand algorithm complexity and behavior.</p>
-                            <div class="tech-stack">
-                                <span class="tech-tag">JavaScript</span>
-                                <span class="tech-tag">HTML5 Canvas</span>
-                                <span class="tech-tag">CSS3</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="#"><i class="fab fa-github"></i> GitHub</a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Project 6 -->
-                    <div class="project-card">
-                        <img src="/api/placeholder/400/180" alt="Project 6" class="project-img">
-                        <div class="project-content">
-                            <h3 class="project-title">Game Development Project</h3>
-                            <p class="project-description">A 2D platform game developed using Unity engine with custom character design, levels, and game mechanics.</p>
-                            <div class="tech-stack">
-                                <span class="tech-tag">C#</span>
-                                <span class="tech-tag">Unity</span>
-                                <span class="tech-tag">Game Design</span>
-                                <span class="tech-tag">Animation</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="#"><i class="fab fa-github"></i> GitHub</a>
-                                <a href="#"><i class="fas fa-gamepad"></i> Play Game</a>
-                            </div>
-                        </div>
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <a href="https://github.com/Dobree12" target="_blank">Github</a>
                     </div>
                 </div>
             </section>
         </main>
         
         <footer>
-            <p>&copy; 2025 Your Name. All rights reserved.</p>
+            <p>&copy; 2025 Dobre Paloti. All rights reserved.</p>
         </footer>
     </div>
 </body>
