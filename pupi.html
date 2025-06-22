@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Love Heart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ff6b9d, #ff8e8e, #ffc0cb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .heart-container {
+            position: relative;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: all 0.6s ease;
+        }
+
+        .heart-container:hover {
+            transform: scale(1.05);
+        }
+
+        .heart {
+            font-size: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            filter: drop-shadow(0 10px 30px rgba(233, 30, 99, 0.4));
+        }
+
+        .heart::before {
+            content: '❤️';
+        }
+
+        .heart::after {
+            display: none;
+        }
+
+        /* Opening animation - split the emoji heart */
+        .heart-container.opened .heart {
+            transform: scale(0.1);
+            opacity: 0;
+        }
+
+        /* Love message */
+        .love-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: all 0.6s ease;
+            z-index: 10;
+            white-space: nowrap;
+        }
+
+        .heart-container.opened .love-message {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        /* Multiple floating hearts with different sizes and speeds */
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float 8s infinite linear;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .floating-heart.small {
+            font-size: 15px;
+            animation-duration: 10s;
+        }
+
+        .floating-heart.medium {
+            font-size: 25px;
+            animation-duration: 6s;
+        }
+
+        .floating-heart.large {
+            font-size: 35px;
+            animation-duration: 12s;
+        }
+
+        .floating-heart.pink { color: #ff69b4; }
+        .floating-heart.red { color: #ff1744; }
+        .floating-heart.purple { color: #e91e63; }
+        .floating-heart.white { color: rgba(255, 255, 255, 0.8); }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Sparkle effect */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .heart-container.opened .sparkle {
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Reset button */
+        .reset-btn {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .heart-container.opened ~ .reset-btn {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .reset-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-50%) translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-container" id="heartContainer">
+        <div class="heart"></div>
+        <div class="love-message">I Love You ❤️</div>
+        
+        <!-- Sparkle effects -->
+        <div class="sparkle" style="top: 20px; left: 30px; animation-delay: 0s;"></div>
+        <div class="sparkle" style="top: 40px; right: 20px; animation-delay: 0.3s;"></div>
+        <div class="sparkle" style="bottom: 30px; left: 40px; animation-delay: 0.6s;"></div>
+        <div class="sparkle" style="bottom: 50px; right: 30px; animation-delay: 0.9s;"></div>
+        <div class="sparkle" style="top: 60px; left: 60%; animation-delay: 1.2s;"></div>
+        <div class="sparkle" style="bottom: 60px; left: 20%; animation-delay: 0.2s;"></div>
+    </div>
+
+    <button class="reset-btn" id="resetBtn">Close Heart</button>
+
+    <script>
+        const heartContainer = document.getElementById('heartContainer');
+        const resetBtn = document.getElementById('resetBtn');
+        let isOpened = false;
+
+        // Create floating hearts
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDelay = Math.random() * 8 + 's';
+            heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+
+        // Create floating hearts periodically
+        setInterval(createFloatingHeart, 1000);
+
+        // Heart click event
+        heartContainer.addEventListener('click', function() {
+            if (!isOpened) {
+                heartContainer.classList.add('opened');
+                isOpened = true;
+                
+                // Add some extra sparkle effects
+                setTimeout(() => {
+                    for (let i = 0; i < 10; i++) {
+                        createSparkle();
+                    }
+                }, 400);
+            }
+        });
+
+        // Reset button event
+        resetBtn.addEventListener('click', function() {
+            heartContainer.classList.remove('opened');
+            isOpened = false;
+        });
+
+        // Create temporary sparkles
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.position = 'absolute';
+            sparkle.style.left = (Math.random() * 300 + 50) + 'px';
+            sparkle.style.top = (Math.random() * 200 + 100) + 'px';
+            sparkle.style.animationDelay = Math.random() * 0.5 + 's';
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1500);
+        }
+
+        // Initial floating hearts
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createFloatingHeart, i * 200);
+        }
+    </script>
+</body>
+</html>
