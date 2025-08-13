@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paloti Dobre - Computer Science Student & System Administrator</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .skill-category h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+
+        /* Projects Section */
+        .projects {
+            background: var(--light);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            padding: 1.5rem;
+            color: var(--white);
+        }
+
+        .project-header h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tech-tag {
+            background: var(--light);
+            color: var(--primary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
+        }
+
+        .experience-item {
+            position: relative;
+            margin-bottom: 3rem;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 2rem;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .experience-title {
+            color: var(--primary);
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .experience-date {
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        .experience-company {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .experience-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .experience-list li {
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .experience-list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            color: var(--accent);
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Footer */
+        .footer {
+            background: #000;
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">PD</div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Paloti Dobre</h1>
+                <div class="subtitle">Computer Science Graduate & Software Developer</div>
+                <p>Passionate about technology, network infrastructure, and mobile app development. Recently graduated with a Bachelor's degree in Computer Science and experienced in system administration and software development.</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        <i class="fas fa-code"></i>
+                        View Projects
+                    </a>
+                    <a href="#contact" class="btn btn-outline">
+                        <i class="fas fa-envelope"></i>
+                        Get In Touch
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-card">
+                    <h3 style="color: white; margin-bottom: 1rem;">Recent Achievements</h3>
+                    <ul style="list-style: none; color: rgba(255,255,255,0.8);">
+                        <li style="margin-bottom: 0.5rem;"><i class="fas fa-graduation-cap" style="margin-right: 0.5rem; color: #06b6d4;"></i>Graduated - Bachelor's in CS</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fas fa-mobile-alt" style="margin-right: 0.5rem; color: #06b6d4;"></i>Completed Fitness App Project</li>
+                        <li><i class="fas fa-certificate" style="margin-right: 0.5rem; color: #06b6d4;"></i>Bitdefender MSP Certified</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div class="about-content">
+                    <h3>Background</h3>
+                    <p>I'm a recent Computer Science graduate from Politehnica University of Timișoara with a strong passion for technology and problem-solving. I have experience working as a System Administrator at Infinilink, where I managed network infrastructure and ensured system security.</p>
+                    
+                    <h3>Education & Certifications</h3>
+                    <p>Recently graduated in June 2025 with a Bachelor's in Computer Science. I hold a Bitdefender MSP certification and achieved C1 level English proficiency. My academic background in Mathematics and Computer Science has provided me with a solid foundation in analytical thinking and technical skills.</p>
+                </div>
+                <div class="about-content">
+                    <h3>Recent Projects</h3>
+                    <p>I recently completed my Bachelor's thesis project - a comprehensive fitness tracking mobile application using Flutter and Firebase. This project showcases my skills in mobile development, real-time data management, and user experience design.</p>
+                    
+                    <h3>Professional Experience</h3>
+                    <p>During my studies, I gained valuable experience as a System Administrator, working with network equipment, managing user authentication systems, and ensuring stable connectivity across enterprise environments. This role enhanced my understanding of cybersecurity and network management.</p>
+                </div>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4><i class="fas fa-code"></i> Programming Languages</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">C/C++</span>
+                        <span class="skill-tag">Dart</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">HTML/CSS</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4><i class="fas fa-tools"></i> Frameworks & Tools</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">WordPress</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4><i class="fas fa-database"></i> Databases</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">Firebase</span>
+                        <span class="skill-tag">Firestore</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">Oracle</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4><i class="fas fa-network-wired"></i> System Admin</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">Network Configuration</span>
+                        <span class="skill-tag">Cisco Packet Tracer</span>
+                        <span class="skill-tag">Bitdefender</span>
+                        <span class="skill-tag">System Security</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3><i class="fas fa-mobile-alt"></i> Fitness Tracking App</h3>
+                        <p>Bachelor's Thesis Project</p>
+                    </div>
+                    <div class="project-content">
+                        <p>A comprehensive cross-platform mobile application that enables users to track their workouts and visualize their fitness progress over time. Features real-time data synchronization and intuitive user interface design.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Dart</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Firestore</span>
+                            <span class="tech-tag">Firebase Auth</span>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <strong>Key Features:</strong>
+                            <ul style="margin-top: 0.5rem; color: #64748b;">
+                                <li>User authentication and profile management</li>
+                                <li>Real-time workout tracking and data storage</li>
+                                <li>Progress visualization and analytics</li>
+                                <li>Media upload functionality</li>
+                                <li>Cross-platform compatibility (iOS/Android)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3><i class="fas fa-network-wired"></i> Complex Network Configuration</h3>
+                        <p>Network Infrastructure Project</p>
+                    </div>
+                    <div class="project-content">
+                        <p>Designed and implemented a comprehensive network topology using Cisco Packet Tracer, featuring advanced routing protocols, security configurations, and multiple network services.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Cisco Packet Tracer</span>
+                            <span class="tech-tag">Network Security</span>
+                            <span class="tech-tag">Routing Protocols</span>
+                            <span class="tech-tag">DNS/SMTP</span>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <strong>Technical Implementation:</strong>
+                            <ul style="margin-top: 0.5rem; color: #64748b;">
+                                <li>Static and dynamic IP addressing with subnetting</li>
+                                <li>Routing protocols (static and dynamic)</li>
+                                <li>DNS, SMTP/POP3, and TFTP services</li>
+                                <li>Network security and access control</li>
+                                <li>End-to-end connectivity testing and troubleshooting</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3><i class="fas fa-globe"></i> Personal Portfolio Website</h3>
+                        <p>Web Development Project</p>
+                    </div>
+                    <div class="project-content">
+                        <p>Modern, responsive personal website showcasing my skills, projects, and professional experience. Features contemporary design with smooth animations and interactive elements.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML/CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Responsive Design</span>
+                            <span class="tech-tag">CSS Grid/Flexbox</span>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <strong>Features:</strong>
+                            <ul style="margin-top: 0.5rem; color: #64748b;">
+                                <li>Modern, responsive design</li>
+                                <li>Interactive UI with smooth animations</li>
+                                <li>Project showcase and CV integration</li>
+                                <li>Contact form and social media links</li>
+                                <li>SEO optimized and performance focused</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Experience & Education</h2>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <div class="experience-title">System Administrator</div>
+                            <div class="experience-company">Infinilink Timișoara</div>
+                        </div>
+                        <div class="experience-date">March 2025 – June 2025</div>
+                    </div>
+                    <ul class="experience-list">
+                        <li>Installed, configured, and updated operating systems and software applications</li>
+                        <li>Set up and maintained network equipment (switches, routers, firewalls)</li>
+                        <li>Monitored and configured network devices ensuring stable and secure connectivity</li>
+                        <li>Managed user authentication, role-based access, and identity lifecycle management</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <div class="experience-title">Bachelor's Degree in Computer Science</div>
+                            <div class="experience-company">Politehnica University of Timișoara</div>
+                        </div>
+                        <div class="experience-date">Sept. 2022 – June 2025</div>
+                    </div>
+                    <ul class="experience-list">
+                        <li>Successfully completed comprehensive curriculum covering software engineering, algorithms, and system design</li>
+                        <li>Specialized coursework in mobile app development and network administration</li>
+                        <li>Bachelor's thesis project: Cross-platform fitness tracking application using Flutter and Firebase</li>
+                        <li>Strong foundation in mathematics, programming, and computer science principles</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <div class="experience-title">Mathematics and Computer Science Profile</div>
+                            <div class="experience-company">"Elena Ghiba-Birta" College Arad</div>
+                        </div>
+                        <div class="experience-date">Sept. 2018 – June 2022</div>
+                    </div>
+                    <ul class="experience-list">
+                        <li>Advanced mathematics and computer science curriculum</li>
+                        <li>Strong foundation in analytical thinking and problem-solving</li>
+                        <li>Introduction to programming concepts and computational thinking</li>
+                        <li>Prepared for university-level computer science studies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Get In Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Let's Connect</h3>
+                    <p style="margin-bottom: 2rem; color: rgba(255,255,255,0.8);">
+                        I'm always interested in new opportunities and collaborations. As a recent Computer Science graduate with experience in system administration and mobile development, I'm actively seeking new challenges. Whether you want to discuss a project, job opportunity, or just say hello, feel free to reach out!
+                    </p>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <strong>Email</strong><br>
+                            <a href="mailto:dobrel.paloti@gmail.com" style="color: #06b6d4;">dobrel.paloti@gmail.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <strong>Phone</strong><br>
+                            <a href="tel:+40741556372" style="color: #06b6d4;">0741 556 372</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <div>
+                            <strong>LinkedIn</strong><br>
+                            <a href="#" style="color: #06b6d4;">linkedin.com/in/paloti-dobre</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div>
+                            <strong>GitHub</strong><br>
+                            <a href="#" style="color: #06b6d4;">github.com/paloti-dobre</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3 style="margin-bottom: 1.5rem; color: #06b6d4;">Send a Message</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" placeholder="What's this about?" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Paloti Dobre. All rights reserved. | Built with passion for technology and innovation.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+            } else {
+                navbar.style.background = 'rgba(15, 23, 42, 0.9)';
+            }
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections and cards
+        document.querySelectorAll('.section, .project-card, .experience-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Contact form handling
+        document.querySelector('.contact-form form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const subject = formData.get('subject');
+            const message = formData.get('message');
+            
+            // Create mailto link
+            const mailtoLink = `mailto:dobrel.paloti@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show confirmation
+            alert('Thank you for your message! Your email client should open with the message ready to send.');
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Add typing effect to hero subtitle
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect when page loads
+        window.addEventListener('load', function() {
+            const subtitle = document.querySelector('.hero-content .subtitle');
+            const originalText = subtitle.textContent;
+            typeWriter(subtitle, originalText, 80);
+        });
+
+        // Add hover effects to project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+                this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.15)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)';
+            });
+        });
+
+        // Add click effect to buttons
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Mobile menu toggle (for future enhancement)
+        const createMobileMenu = () => {
+            const navbar = document.querySelector('.navbar');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (window.innerWidth <= 768) {
+                if (!document.querySelector('.mobile-toggle')) {
+                    const toggle = document.createElement('button');
+                    toggle.classList.add('mobile-toggle');
+                    toggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    toggle.style.cssText = `
+                        background: none;
+                        border: none;
+                        color: white;
+                        font-size: 1.5rem;
+                        cursor: pointer;
+                        display: block;
+                    `;
+                    
+                    toggle.addEventListener('click', () => {
+                        navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+                        navMenu.style.flexDirection = 'column';
+                        navMenu.style.position = 'absolute';
+                        navMenu.style.top = '100%';
+                        navMenu.style.left = '0';
+                        navMenu.style.width = '100%';
+                        navMenu.style.background = 'rgba(15, 23, 42, 0.95)';
+                        navMenu.style.padding = '1rem';
+                    });
+                    
+                    navbar.querySelector('.nav-container').appendChild(toggle);
+                }
+            }
+        };
+
+        window.addEventListener('resize', createMobileMenu);
+        createMobileMenu();
+    </script>
+</body>
+</html>
