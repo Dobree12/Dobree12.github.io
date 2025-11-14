@@ -421,6 +421,32 @@
             margin-bottom: 1.5rem;
         }
 
+        .contact-status {
+            display: none;
+            margin-top: 1.25rem;
+            padding: 1rem 1.25rem;
+            border-radius: 0.75rem;
+            font-weight: 500;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .contact-status.visible {
+            display: block;
+        }
+
+        .contact-status.success {
+            background: rgba(34, 197, 94, 0.12);
+            color: #22c55e;
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+
+        .contact-status.error {
+            background: rgba(248, 113, 113, 0.12);
+            color: #f87171;
+            border-color: rgba(248, 113, 113, 0.4);
+        }
+
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
@@ -808,7 +834,7 @@
                 
                 <div class="contact-form">
                     <h3 style="margin-bottom: 1.5rem; color: #06b6d4;">Send a Message</h3>
-                    <form>
+                    <form id="contact-form" action="https://formsubmit.co/dobrel.paloti@gmail.com" method="POST">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" id="name" name="name" placeholder="Your Name" required>
@@ -825,11 +851,15 @@
                             <label for="message">Message</label>
                             <textarea id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
                         </div>
+                        <input type="hidden" name="_subject" value="New portfolio contact">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
                         <button type="submit" class="btn btn-primary" style="width: 100%;">
                             <i class="fas fa-paper-plane"></i>
                             Send Message
                         </button>
                     </form>
+                    <div id="contact-status" class="contact-status" aria-live="polite"></div>
                 </div>
             </div>
         </div>
@@ -887,28 +917,45 @@
         });
 
         // Contact form handling
-        document.querySelector('.contact-form form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const subject = formData.get('subject');
-            const message = formData.get('message');
-            
-            // Create mailto link
-            const mailtoLink = `mailto:dobrel.paloti@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
-            
-            // Open email client
-            window.location.href = mailtoLink;
-            
-            // Show confirmation
-            alert('Thank you for your message! Your email client should open with the message ready to send.');
-            
-            // Reset form
-            this.reset();
-        });
+        (function() {
+            const form = document.getElementById('contact-form');
+            const statusEl = document.getElementById('contact-status');
+            if (!form || !statusEl) return;
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                const formData = new FormData(form);
+                const payload = Object.fromEntries(formData.entries());
+
+                statusEl.className = 'contact-status visible';
+                statusEl.textContent = 'Sending your message...';
+
+                try {
+                    const response = await fetch('https://formsubmit.co/ajax/dobrel.paloti@gmail.com', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json().catch(() => ({}));
+                        throw new Error(errorData.message || 'There was a problem sending your message.');
+                    }
+
+                    statusEl.className = 'contact-status visible success';
+                    statusEl.textContent = 'Mulțumesc! Mesajul tău a fost trimis cu succes și voi reveni în curând.';
+                    form.reset();
+                } catch (error) {
+                    console.error('Contact form submission error:', error);
+                    statusEl.className = 'contact-status visible error';
+                    statusEl.textContent = 'Ne pare rău, a apărut o eroare la trimiterea mesajului. Te rugăm să încerci din nou sau să trimiți un email direct la dobrel.paloti@gmail.com.';
+                }
+            });
+        })();
 
         // Add typing effect to hero subtitle
         function typeWriter(element, text, speed = 100) {
